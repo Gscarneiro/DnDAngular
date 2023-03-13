@@ -12,7 +12,7 @@ export class ApiService {
     var serverUrl : string = '';
 
     function get(path: string, params:any): Observable<Object> {
-      return http.get(path).subscribe;
+      return http.get(path);
     }
 
   }
