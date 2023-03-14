@@ -2,13 +2,15 @@
   <thead>
     <tr>
       <th scope="col">Name</th>
-      <th scope="col">N° of Subclasses</th>
+      <th scope="col">Type</th>
+      <th scope="col">Size</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
+    <tr *ngFor="let race of raceList">
+      <td>{{ race.name }}</td>
+      <td>{{ race.type }}</td>
+      <td>{{ race.size }}</td>
     </tr>
   </tbody>
 </table>

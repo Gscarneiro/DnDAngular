@@ -4,16 +4,14 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
+  private readonly API: string = 'https://localhost:7184/';
 
-  constructor(private http: HttpClient) {
-    var serverUrl : string = '';
+  constructor(private http: HttpClient) {}
 
-    function get(path: string, params:any): Observable<Object> {
-      return http.get(path);
-    }
-
+  get(path: string, params?: any): Observable<Object> {
+    return this.http.get(this.API + path);
   }
 }
