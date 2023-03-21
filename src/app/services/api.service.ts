@@ -11,7 +11,21 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  serialize(url: string, obj: any): string {
+    var str: string[] = [];
+    for (var p in obj) {
+      if (obj.hasOwnProperty(p)) {
+        if (!url.includes(':' + p)) {
+          var v = obj[p];
+        } else {
+          url = url.replace(':' + p, obj[p]);
+        }
+      }
+    }
+    return url + '?' + str.join('&').replace('&&', '&');
+  }
+
   get(path: string, params?: any): Observable<Object> {
-    return this.http.get(this.API + path);
+    return this.http.get(this.API + path, { params: params });
   }
 }
