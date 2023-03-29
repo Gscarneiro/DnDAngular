@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { RaceListComponent } from './components/race/race-list/race-list.component';
 import { RaceEditComponent } from './components/race/race-edit/race-edit.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, RaceListComponent, RaceEditComponent],
@@ -20,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -15,6 +15,8 @@ import { TYPES } from 'src/app/constants/types';
 export class RaceEditComponent {
   selectedId: string | null = null;
 
+  addingFeature: boolean = false;
+
   sizes = SIZES;
   types = TYPES;
 
@@ -35,4 +37,8 @@ export class RaceEditComponent {
   }
 
   onSubmit() {}
+
+  addFeature() {
+    this.addingFeature = true;
+  }
 }

@@ -43,21 +43,18 @@
           <input type="text" class="form-control" id="swimSpeed" name="swimSpeed" [(ngModel)]="race.swimSpeed" />
         </div>
       </div>
+
+      <div class="row g-3 mb-3">
+        <h6 class="mb-2 text-muted">Features</h6>
+
+        <div class="col-3">
+          <button (click)="addFeature()" *ngIf="!addingFeature" class="btn btn-primary">+ New Feature</button>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row-reverse mt-3">
+        <button type="submit" (click)="onSubmit()" class="btn btn-success float-right">Save</button>
+      </div>
     </form>
   </div>
-</div>
-
-<div class="d-flex flex-row-reverse mt-3">
-  <button type="submit" (click)="onSubmit()" class="btn btn-success float-right">Save</button>
-</div>
-
-<div class="card" style="width: 18rem">
-  <img src="..." class="card-img-top" alt="..." />
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-
-<div class="d-flex flex-row-reverse mt-3">
-  <button type="submit" (click)="onSubmit()" class="btn btn-success float-right">Save</button>
 </div>
