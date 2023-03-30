@@ -1,26 +1,12 @@
 <div class="row g-2 justify-content-between">
   <div class="col-4">
     <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search race"
-        aria-label="Search race"
-        [(ngModel)]="filters.title"
-      />
-      <button type="button" class="btn btn-primary" (click)="list()">
-        Search
-      </button>
+      <input type="text" class="form-control" placeholder="Search race" aria-label="Search race" [(ngModel)]="filters.title" />
+      <button type="button" class="btn btn-primary" (click)="list()">Search</button>
     </div>
   </div>
   <div class="col-8">
-    <button
-      type="button"
-      class="btn btn-primary float-end"
-      (click)="openEdition()"
-    >
-      New Race
-    </button>
+    <button type="button" class="btn btn-primary float-end" (click)="openEdition()">New Race</button>
   </div>
 </div>
 <div class="card">

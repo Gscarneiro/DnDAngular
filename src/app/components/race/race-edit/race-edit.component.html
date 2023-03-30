@@ -47,8 +47,8 @@
       <div class="row g-3 mb-3">
         <h6 class="mb-2 text-muted">Features</h6>
 
-        <div class="col-3">
-          <button (click)="addFeature()" *ngIf="!addingFeature" class="btn btn-primary">+ New Feature</button>
+        <div class="col-3" [hidden]="addingFeature">
+          <button (click)="openModalEditionFeature()" class="btn btn-primary">+ New Feature</button>
         </div>
       </div>
 

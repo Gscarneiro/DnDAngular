@@ -6,6 +6,10 @@ import { Race } from 'src/app/models/race.model';
 import { Urls } from 'src/app/constants/urls';
 import { SIZES } from 'src/app/constants/sizes';
 import { TYPES } from 'src/app/constants/types';
+import { faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { Feature } from 'src/app/models/feature.model';
+import { FeatureEditComponent } from '../../feature/feature-edit/feature-edit.component';
+import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-race-edit',
@@ -13,16 +17,18 @@ import { TYPES } from 'src/app/constants/types';
   styleUrls: ['./race-edit.component.css'],
 })
 export class RaceEditComponent {
-  selectedId: string | null = null;
-
-  addingFeature: boolean = false;
-
+  bsModalRef?: BsModalRef;
+  faXmark = faXmark;
+  faCheck = faCheck;
   sizes = SIZES;
   types = TYPES;
 
+  selectedId: string | null = null;
+  addingFeature: boolean = false;
+  newFeature: Feature = new Feature();
   race: Race = new Race();
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {}
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private modalService: BsModalService) {}
 
   ngOnInit() {
     this.selectedId = this.route.snapshot.paramMap.get('id');
@@ -38,7 +44,20 @@ export class RaceEditComponent {
 
   onSubmit() {}
 
-  addFeature() {
-    this.addingFeature = true;
+  openModalEditionFeature(feature: Feature = new Feature()) {
+    this.addingFeature = false;
+    this.race.Features.push(this.newFeature);
+
+    const options: ModalOptions = {
+      initialState: {
+        feature: feature,
+      },
+    };
+
+    this.bsModalRef = this.modalService.show(FeatureEditComponent, options);
+
+    this.bsModalRef.content.event.subscribe((res: { data: Feature }) => {
+      this.race.Features.push(res.data);
+    });
   }
 }
