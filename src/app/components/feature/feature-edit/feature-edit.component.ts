@@ -17,7 +17,14 @@ export class FeatureEditComponent implements OnInit {
   ngOnInit() {}
 
   save() {
-    this.event.emit({ data: this.feature, res: 200 });
+    var res = 201;
+
+    if (!this.feature.id) {
+      this.feature.id = crypto.randomUUID();
+      res = 200;
+    }
+
+    this.event.emit({ data: this.feature, res: res });
     this.bsModalRef.hide();
   }
 }

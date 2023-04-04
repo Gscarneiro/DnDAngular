@@ -6,10 +6,11 @@ import { Race } from 'src/app/models/race.model';
 import { Urls } from 'src/app/constants/urls';
 import { SIZES } from 'src/app/constants/sizes';
 import { TYPES } from 'src/app/constants/types';
-import { faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faCheck, faPen } from '@fortawesome/free-solid-svg-icons';
 import { Feature } from 'src/app/models/feature.model';
 import { FeatureEditComponent } from '../../feature/feature-edit/feature-edit.component';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-race-edit',
@@ -20,12 +21,11 @@ export class RaceEditComponent {
   bsModalRef?: BsModalRef;
   faXmark = faXmark;
   faCheck = faCheck;
+  faPen = faPen;
   sizes = SIZES;
   types = TYPES;
 
   selectedId: string | null = null;
-  addingFeature: boolean = false;
-  newFeature: Feature = new Feature();
   race: Race = new Race();
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private modalService: BsModalService) {}
@@ -44,9 +44,12 @@ export class RaceEditComponent {
 
   onSubmit() {}
 
-  openModalEditionFeature(feature: Feature = new Feature()) {
-    this.addingFeature = false;
-    this.race.Features.push(this.newFeature);
+  openModalEditionFeature(index: number | undefined = undefined) {
+    var feature: Feature = new Feature();
+
+    if (index != undefined) {
+      feature = this.race.Features[index];
+    }
 
     const options: ModalOptions = {
       initialState: {
@@ -56,8 +59,20 @@ export class RaceEditComponent {
 
     this.bsModalRef = this.modalService.show(FeatureEditComponent, options);
 
-    this.bsModalRef.content.event.subscribe((res: { data: Feature }) => {
-      this.race.Features.push(res.data);
+    this.bsModalRef.content.event.subscribe((item: { data: Feature; res: number }) => {
+      if (item.res == 200) {
+        this.race.Features = [...this.race.Features, item.data];
+      }
+
+      if (item.res == 201 && index != undefined) {
+        this.race.Features[index] = item.data;
+      }
+    });
+  }
+
+  deleteFeature(id: string) {
+    this.race.Features = _.reject(this.race.Features, function (race) {
+      return race.id == id;
     });
   }
 }

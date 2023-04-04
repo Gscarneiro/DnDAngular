@@ -12,10 +12,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeatureEditComponent } from './components/feature/feature-edit/feature-edit.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { SortableModule } from 'ngx-bootstrap/sortable';
 
 @NgModule({
   declarations: [AppComponent, RaceListComponent, RaceEditComponent, FeatureEditComponent],
-  imports: [CommonModule, BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, BrowserAnimationsModule, ModalModule.forRoot()],
+  imports: [CommonModule, BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, BrowserAnimationsModule, ModalModule.forRoot(), SortableModule.forRoot()],
   providers: [],
   bootstrap: [AppComponent],
 })
