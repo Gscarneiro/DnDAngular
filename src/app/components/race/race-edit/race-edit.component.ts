@@ -48,7 +48,7 @@ export class RaceEditComponent {
     var feature: Feature = new Feature();
 
     if (index != undefined) {
-      feature = this.race.Features[index];
+      feature = JSON.parse(JSON.stringify(this.race.Features[index]));
     }
 
     const options: ModalOptions = {
@@ -66,6 +66,7 @@ export class RaceEditComponent {
 
       if (item.res == 201 && index != undefined) {
         this.race.Features[index] = item.data;
+        this.race.Features = [...this.race.Features];
       }
     });
   }

@@ -46,8 +46,7 @@
 
       <div class="row g-3 mb-3">
         <h6 class="mb-2 text-muted">Features</h6>
-
-        <div class="col-12">
+        <div class="col-12 mt-0">
           <bs-sortable
             [(ngModel)]="race.Features"
             [itemTemplate]="itemTemplate"
@@ -57,8 +56,25 @@
             wrapperClass="sortableWrapper"
           ></bs-sortable>
         </div>
-        <div class="col-12">
+        <div class="col-12 mt-0">
           <button (click)="openModalEditionFeature()" class="btn btn-primary">+ New Feature</button>
+        </div>
+      </div>
+
+      <div class="row g-3 mb-3">
+        <h6 class="mb-2 text-muted">Sub Races</h6>
+        <div class="col-12 mt-0">
+          <bs-sortable
+            [(ngModel)]="race.SubRaces"
+            [itemTemplate]="itemTemplate"
+            name="subRaces"
+            itemClass="card mb-2"
+            itemActiveClass="sortableItemActive"
+            wrapperClass="sortableWrapper"
+          ></bs-sortable>
+        </div>
+        <div class="col-12 mt-0">
+          <button (click)="openModalEditionFeature()" class="btn btn-primary">+ New Sub Race</button>
         </div>
       </div>
 
@@ -70,18 +86,15 @@
 </div>
 
 <ng-template #itemTemplate let-item="item" let-index="index">
-  <div class="card-header d-flex justify-content-end">
+  <div class="card-body d-flex justify-content-between">
+    <h5 class="card-title mb-0">{{ item.value.name }}</h5>
     <ul class="list-inline mb-0">
       <li class="list-inline-item">
         <button class="btn btn-sm btn-light" (click)="openModalEditionFeature(index)"><fa-icon [icon]="faPen"></fa-icon></button>
       </li>
       <li class="list-inline-item">
-        <button class="btn btn-sm btn-light" (click)="deleteFeature(item)"><fa-icon [icon]="faXmark"></fa-icon></button>
+        <button class="btn btn-sm btn-light" (click)="deleteFeature(item.value.id)"><fa-icon [icon]="faXmark"></fa-icon></button>
       </li>
     </ul>
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{ item.value.name }}</h5>
-    <p class="card-text">{{ item.value.description }}</p>
   </div>
 </ng-template>
